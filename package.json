@@ -1,0 +1,14 @@
+{
+  "name": "shareit",
+  "version": "0.0.1",
+  "description": "ShaReIt is an p2p file sharing between everyone",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "author": "pablo.m.bianco@hotmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "nedb": "^1.8.0"
+  }
+}
