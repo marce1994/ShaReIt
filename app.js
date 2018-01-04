@@ -2,6 +2,7 @@ var Datastore = require('nedb');
 
 // Of course you can create multiple datastores if you need several
 // collections. In this case it's usually a good idea to use autoload for all collections.
+// Database will save all new block.
 db = {};
 db.blocks = new Datastore('./database/blocks.db');
 
