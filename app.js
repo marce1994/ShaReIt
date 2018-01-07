@@ -30,9 +30,9 @@ function getUploads(filter){
 function getUploadsPaginated(filter, numxpage, page, callback){
     db.uploads.count(filter, function (err, count) {
         if(page < (count/numxpage)+1){
-            console.log(numxpage,page);
+            //console.log(numxpage,page);
             db.uploads.find(filter).skip(numxpage * (page-1)).limit(numxpage).exec(function (err, docs) {
-                console.log(docs.length);
+                //console.log(docs.length);
                 callback(err, docs, Math.ceil(count/numxpage));
             });
         }else{
