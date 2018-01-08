@@ -4,6 +4,8 @@ p2p Share magnet link application.
 
 # How to start
 
-  -CLONE THE REPOSITORY
-  -npm install
-  -node app.js
+  - CLONE THE REPOSITORY
+  - npm install
+  - node app.js
+
+If u are interested in make contributions, you are welcome :)
