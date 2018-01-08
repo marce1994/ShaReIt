@@ -62,12 +62,10 @@
           <div class="img__description">
               <h2 data-bind="text: title"></h2>
               <p data-bind="text: description"></p>
+              <p data-bind="text: magnet"></p>
           </div>
         </div>
       </div>
-      <ul class="pagination" data-bind="foreach: new Array(pageCount())">
-          <li><a data-bind='text: $index()+1' href=""></a></li>
-      </ul>
     </div>
     <!-- /.container -->
 
@@ -83,7 +81,7 @@
     <script src="jquery/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="http://knockoutjs.com/downloads/knockout-3.4.2.js"></script>
-    <script src="js/index-model.js"></script>
+    <script src="js/index-model.js"></script>  
     <script src="js/index.js"></script>
   </body>
 

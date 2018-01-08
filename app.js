@@ -13,7 +13,8 @@ function addUpload(magnetLink, title, description, callback){
     var doc = {
         magnet: magnetLink,
         title : title,
-        description : description
+        description : description,
+        timestamp: Date.now()
     };
     var insert = db.uploads.insert(doc, function(err,newDoc){
         callback(err,newDoc);
@@ -30,7 +31,7 @@ function getUploadsPaginated(filter, numxpage, page, callback){
     db.uploads.count(filter, function (err, count) {
         if(page < (count/numxpage)+1){
             //console.log(numxpage,page);
-            db.uploads.find(filter).skip(numxpage * (page-1)).limit(numxpage).exec(function (err, docs) {
+            db.uploads.find(filter).sort({ timestamp: -1 }).skip(numxpage * (page-1)).limit(numxpage).exec(function (err, docs) {
                 //console.log(docs.length);
                 callback(err, docs, Math.ceil(count/numxpage));
             });

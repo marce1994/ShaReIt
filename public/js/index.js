@@ -17,7 +17,6 @@ function loadLatestUploads(numxpage, page){
             indexViewModel.latestUploads(res.docs);
             indexViewModel.pageCount(res.pages);
             indexViewModel.actualPage(res.currentPage);
-            console.log(indexViewModel.latestUploads());
         }
     });
 }
