@@ -4,7 +4,7 @@ var Datastore = require('nedb');
 db = {};
 db.uploads = new Datastore('database/uploads.db');
 //db.robots = new Datastore('path/to/robots.db');
- 
+
 // You need to load each database (here we do it asynchronously) 
 db.uploads.loadDatabase();
 //db.robots.loadDatabase();
@@ -15,7 +15,6 @@ function addUpload(magnetLink, title, description, callback){
         title : title,
         description : description
     };
-
     var insert = db.uploads.insert(doc, function(err,newDoc){
         callback(err,newDoc);
     });
@@ -41,12 +40,11 @@ function getUploadsPaginated(filter, numxpage, page, callback){
     });
 };
 
-//****************************** */
+//*******************************/
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 var path = require('path');
-var formidable = require('formidable');
 var fs = require('fs');
 
 app.use(bodyParser.json());
@@ -57,43 +55,12 @@ app.get('/', function(req, res){
   res.sendFile(path.join(__dirname, 'views/index.html'));
 });
 
-app.post('/upload', function(req, res){
-
-  // create an incoming form object
-  var form = new formidable.IncomingForm();
-
-  // specify that we want to allow the user to upload multiple files in a single request
-  form.multiples = true;
-
-  // store all uploads in the /uploads directory
-  form.uploadDir = path.join(__dirname, '/uploads');
-
-  // every time a file has been uploaded successfully,
-  // rename it to it's orignal name
-  form.on('file', function(field, file) {
-    fs.rename(file.path, path.join(form.uploadDir, file.name));
-  });
-
-  // log any errors that occur
-  form.on('error', function(err) {
-    console.log('An error has occured: \n' + err);
-  });
-
-  // once all the files have been uploaded, send a response to the client
-  form.on('end', function() {
-    res.end('success');
-  });
-
-  // parse the incoming request containing the form data
-  form.parse(req);
-
-});
- 
 app.get('/api/lastestuploads', function(req, res) {
     getUploadsPaginated({ }, req.query.numxpage, req.query.page, function(err, docs, pages){
         if(err == null){
             var obj = {};
             obj.pages = pages;
+            obj.currentPage = req.query.page;
             obj.docs = docs;
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify(obj));
@@ -106,8 +73,6 @@ app.get('/api/lastestuploads', function(req, res) {
     });
 });
 
-// POST http://localhost:8080/api/users
-// parameters sent with 
 app.post('/api/upload', function(req, res) {
     addUpload(req.body.magnet, req.body.title, req.body.description, function(err, doc){
         if(err == null){
@@ -158,5 +123,37 @@ function data(){
     d.Title = 'tags';
     d.Title = 'magnet link';            
 };
+
+app.post('/upload', function(req, res){
+
+  // create an incoming form object
+  var form = new formidable.IncomingForm();
+
+  // specify that we want to allow the user to upload multiple files in a single request
+  form.multiples = true;
+
+  // store all uploads in the /uploads directory
+  form.uploadDir = path.join(__dirname, '/uploads');
+
+  // every time a file has been uploaded successfully,
+  // rename it to it's orignal name
+  form.on('file', function(field, file) {
+    fs.rename(file.path, path.join(form.uploadDir, file.name));
+  });
+
+  // log any errors that occur
+  form.on('error', function(err) {
+    console.log('An error has occured: \n' + err);
+  });
+
+  // once all the files have been uploaded, send a response to the client
+  form.on('end', function() {
+    res.end('success');
+  });
+
+  // parse the incoming request containing the form data
+  form.parse(req);
+
+});
 
 console.log(JSON.stringify(block('ub88876FVSD6Vdytasvda5f', '0','fgdfe6s6hse6hs56km5768m8d76876578', '12345', '{PITO,PATO,PUTO}', 10)));*/

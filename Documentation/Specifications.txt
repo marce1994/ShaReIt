@@ -1,0 +1,2 @@
+-This program its modular. web, webapi and db can be modified or replaced.
+-Main node module cant be modified, that one manages the syncronization and integrity check responsable.
