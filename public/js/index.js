@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    loadLatestUploads(12,1);
+    loadLatestUploads(20,1);
     ko.applyBindings(indexViewModel);
 });
 

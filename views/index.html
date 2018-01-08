@@ -52,21 +52,44 @@
     </nav>
 
     <!-- Page Content -->
-    <div class="container">
+    <div class="container main">
 
-      <h1 class="my-4 text-center text-lg-left">Latest uploads</h1>
+        <h1 class="my-4 text-center text-lg-left">Latest uploads</h1>
+
+      <div class="row text-center text-lg-left"  data-bind="foreach: latestUploads">
+
+        <div class="img__wrap col-lg-3 col-md-4 col-xs-6">
+          <a href="#" class="d-block mb-4 h-100">
+            <img class="img__img img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+            <div class="img__description">
+                <h2 data-bind="text: title"></h2>
+                <p data-bind="text: description"></p>
+                <p data-bind="text: magnet"></p>
+            </div>
+          </a>
+        </div>
+        
+      </div>
+      <!--<h1 class="my-4 text-center text-lg-left">Latest uploads</h1>
 
       <div class="row text-center text-lg-left" data-bind="foreach: latestUploads">
-        <div class="img__wrap col-lg-3 col-md-4 col-xs-6">
-          <img class="img__img img-fluid img-thumbnail" src="http://placehold.it/257x200.jpg" />
-          <div class="img__description">
+        <div class="img__wrap col-lg-2 col-md-4 col-xs-6">
+          <img class="img__img img-fluid img-thumbnail" src="http://placehold.it/360x300.jpg" />
+          <div class="img__description  img-fluid img-thumbnail">
               <h2 data-bind="text: title"></h2>
               <p data-bind="text: description"></p>
               <p data-bind="text: magnet"></p>
           </div>
         </div>
       </div>
+
+      <div class="col-lg-3 col-md-4 col-xs-6" data-bind="foreach: latestUploads">
+        <a href="#" class="d-block mb-4 h-100">
+          <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+        </a>
+      </div>-->
     </div>
+    
     <!-- /.container -->
 
     <!-- Footer -->

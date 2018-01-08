@@ -1,11 +1,25 @@
-body {
-  padding-top: 54px;
+/* quick reset */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
-@media (min-width: 992px) {
-  body {
-    padding-top: 56px;
-  }
+body {
+  padding-top: 54px;
+  background-image: url("../img/background.jpg");
+  background-color: #cccccc;
+}
+
+.main {
+  background: rgba(29, 106, 154, 0.3);
+}
+
+/* relevant styles */
+.img__wrap {
+  position: relative;
+  height: 200px;
+  width: 257px;
 }
 
 .img__description {
@@ -14,7 +28,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(29, 106, 154, 0.1);
+  background: rgba(29, 106, 154, 0.2);
   color: #fff;
   visibility: hidden;
   opacity: 0;
