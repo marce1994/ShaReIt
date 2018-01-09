@@ -15,8 +15,8 @@ function loadLatestUploads(numxpage, page){
         contentType: "application/json",
         success: function(res) {
             indexViewModel.latestUploads(res.docs);
-            indexViewModel.pageCount(res.pages);
-            indexViewModel.actualPage(res.currentPage);
+            //indexViewModel.pageCount(res.pages);
+            //indexViewModel.actualPage(res.currentPage);
         }
     });
 }

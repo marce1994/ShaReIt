@@ -16,17 +16,17 @@ function addUpload(magnetLink, title, description, callback){
         },
         function(ack)
         {
-            //console.log(ack);
             callback(ack);
         }
     );
 };
 //********************************************************//
-function getUploadsPaginated(filter, numxpage, page, callback){
-    var result = [];
+function getUploadsPaginated(callback){
     //Async -> i dont know how to put a callback into this
     //http://gun.js.org/docs/val.html
+    var counter = 0;
     gun.get('uploads_database').map().val(function(data){
+        counter++;
         var obj = {
             dbId: data._['#'],
             magnet: data.magnet,
@@ -34,11 +34,8 @@ function getUploadsPaginated(filter, numxpage, page, callback){
             description: data.description,
             timestamp: data.timestamp,
         };
-        result.push(obj);
+        callback(obj,counter);
     });
-    setTimeout(function(){
-        callback(null, result, 10);            
-    }, 1000);
 };
 ////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////WEBAPI/////////////////////////////////////////////////////
@@ -59,26 +56,16 @@ app.get('/', function(req, res){
 });
 //********************************************************//
 app.get('/api/lastestuploads', function(req, res) {
-    getUploadsPaginated({ }, req.query.numxpage, req.query.page, function(v, k, pages){
-            var obj = {};
-            obj.k = v;
-            obj.v = k;
+    var obj = {}
+    obj.docs = [];
+    getUploadsPaginated(function(doc, counter){
+        //{ }, req.query.numxpage, req.query.page,
+        obj.count = counter;
+        obj.docs.push(doc);
+        if(counter == req.query.numxpage){
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify(obj));
-        /*if(err == null){
-            var obj = {};
-            obj.pages = pages;
-            obj.currentPage = req.query.page;
-            obj.docs = docs;
-            res.setHeader('Content-Type', 'application/json');
-            res.send(JSON.stringify(obj));
-        }else{
-            var obj = {};
-            obj.pages = pages;
-            obj.error = err;
-            res.setHeader('Content-Type', 'application/json');
-            res.send(JSON.stringify(obj));
-        }*/
+        }
     });
 });
 //********************************************************//
