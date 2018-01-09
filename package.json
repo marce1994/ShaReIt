@@ -11,6 +11,7 @@
   "dependencies": {
     "express": "4.16.2",
     "formidable": "1.1.1",
+    "gun": "^0.9.6",
     "nedb": "1.8.0"
   }
 }
