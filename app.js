@@ -1,10 +1,19 @@
 ////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////DBAPI//////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
+var express = require('express');
+var bodyParser = require('body-parser');
+var app = express();
+var http = require('http').createServer(app);
+var io = require('socket.io')(http);
+var path = require('path');
+var fs = require('fs');
+
 var Gun = require('gun');
 var gunOptions = {
   file: 'database/data.json',
-  peers: ['192.168.1.130:3000','192.168.1.130:3000']
+  peers: ['192.168.1.130:3000','192.168.1.130:3000'],
+  web: http
 }
 var gun = Gun(gunOptions);
 //********************************************************//
@@ -44,13 +53,6 @@ function getUploadsPaginated(callback){
 ////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////WEBAPI/////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
-var http = require('http').createServer(app);
-var io = require('socket.io')(http);
-var path = require('path');
-var fs = require('fs');
 
 app.use(bodyParser.json());
 
@@ -125,6 +127,6 @@ io.sockets.on('disconnect', function (socket) {
   console.log('Server listening on port 3000');
 });*/
 
-var server = http.listen(3000, function(){
-  console.log('Server listening on port 3000');
+var server = http.listen(8080, function(){
+  console.log('Server listening on port 8080');
 });
