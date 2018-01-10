@@ -60,7 +60,7 @@
 
         <div class="img__wrap col-lg-3 col-md-4 col-xs-6">
           <div class="d-block mb-4 h-100">
-            <img class="img__img img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+            <img class="img__img img-fluid img-thumbnail" data-bind="attr: { src: imgLink }" alt="srry, img not found">
             <div class="img__description">
                 <h2 data-bind="text: title"></h2>
                 <p data-bind="text: 'Descripcion: ' + description"></p>
@@ -106,6 +106,7 @@
     <script src="jquery/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="http://knockoutjs.com/downloads/knockout-3.4.2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>    
     <script src="js/index-model.js"></script>  
     <script src="js/index.js"></script>
   </body>

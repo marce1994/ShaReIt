@@ -2,15 +2,14 @@
 /////////////////////////////DBAPI//////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 var Gun = require('gun');
-var gun = Gun({
-    file: 'database/data.json',
-});
+var gun = Gun({file: 'database/data.json',}, ['http://192.168.1.130:3000/gun', 'http://192.168.1.131:3000/gun']);
 //********************************************************//
-function addUpload(magnetLink, title, description, callback){
+function addUpload(magnetLink, title, description, imgLink, callback){
     var uploads = gun.get('uploads_database');
     uploads.set({
-            magnet: magnetLink,
             title : title,
+            imgLink : imgLink,
+            magnet: magnetLink,
             description : description,
             timestamp: Date.now()
         },
@@ -31,6 +30,7 @@ function getUploadsPaginated(callback){
             dbId: data._['#'],
             magnet: data.magnet,
             title: data.title,
+            imgLink: data.imgLink,
             description: data.description,
             timestamp: data.timestamp,
         };
@@ -43,6 +43,8 @@ function getUploadsPaginated(callback){
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
+var http = require('http').createServer(app);
+var io = require('socket.io')(http);
 var path = require('path');
 var fs = require('fs');
 
@@ -56,6 +58,7 @@ app.get('/', function(req, res){
 });
 //********************************************************//
 app.get('/api/lastestuploads', function(req, res) {
+    //console.log(req.query);
     var obj = {}
     obj.docs = [];
     getUploadsPaginated(function(doc, counter){
@@ -65,18 +68,59 @@ app.get('/api/lastestuploads', function(req, res) {
         if(counter == req.query.numxpage){
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify(obj));
+            //console.log(obj);
         }
     });
 });
 //********************************************************//
 app.post('/api/upload', function(req, res) {
-    console.log(req.body.magnet, req.body.title, req.body.description);
-    addUpload(req.body.magnet, req.body.title, req.body.description, function(ack){
+    addUpload(req.body.magnet, req.body.title, req.body.description, req.body.imgLink, function(ack){
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(ack));
     });
 });
+
+//Socket.IO configuration
+var clients = [];
+var update = [];
+gun.get('uploads_database').on(function(data, key){
+    //gun.get(key).get()
+    var puntero = data._['>'];
+    var keyNames = Object.keys(puntero);
+    update.push(keyNames[0]);
+    gun.get(keyNames[0]).val(function(data){
+        var obj = {
+            dbId: data._['#'],
+            magnet: data.magnet,
+            title: data.title,
+            imgLink: data.imgLink,
+            description: data.description,
+            timestamp: data.timestamp,
+        };
+        io.sockets.emit('new', obj);
+    });
+},true);
+
+setInterval(function(){
+    if(update.length > 0){
+        
+    }
+}, 1000);
+//cuando se conecta un cliente nuevo
+io.sockets.on('connect', function (socket) {
+    clients.push(socket);
+    socket.emit("Connected...");
+});
+
+io.sockets.on('disconnect', function (socket) {
+    socket.emit("Disconnected...");
+    clients.splice(clients.indexOf(socket),1);
+});
 //********************************************************//
-var server = app.listen(3000, function(){
+/*var server = app.listen(3000, function(){
+  console.log('Server listening on port 3000');
+});*/
+
+var server = http.listen(3000, function(){
   console.log('Server listening on port 3000');
 });
