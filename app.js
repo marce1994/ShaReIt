@@ -2,7 +2,11 @@
 /////////////////////////////DBAPI//////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 var Gun = require('gun');
-var gun = Gun(['http://192.168.1.130:3000/gun', 'http://192.168.1.131:3000/gun']);
+var gunOptions = {
+  file: 'database/data.json',
+  peers: ['192.168.1.130:3000','192.168.1.130:3000']
+}
+var gun = Gun(gunOptions);
 //********************************************************//
 function addUpload(magnetLink, title, description, imgLink, callback){
     var uploads = gun.get('uploads_database');
