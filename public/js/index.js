@@ -23,7 +23,7 @@ function loadLatestUploads(numxpage, page){
     });
 }
 
-var socket = io.connect('http://192.168.1.124:3000', { 'forceNew': true });
+var socket = io.connect();
 
 socket.on('messages', function(data) {
   console.log(data);
