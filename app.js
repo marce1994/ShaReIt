@@ -127,6 +127,6 @@ io.sockets.on('disconnect', function (socket) {
   console.log('Server listening on port 3000');
 });*/
 
-var server = http.listen(5000, function(){
-  console.log('Server listening on port 5000');
+var server = http.listen(process.env.PORT || 5000, function(){
+  console.log('Server listening on port ' + process.env.PORT || 5000);
 });
