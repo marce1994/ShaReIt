@@ -22,6 +22,6 @@
   "description" : "Put some description here"
 }
 ```
-  - Readdy, u can see real time posting in your web, and if there is another one in other server connected and peeared u can see it in that too. :)
+  - Ready, u can see real time posting in your web, and if there is another one in other server connected and peeared u can see it in that too. :)
 
 If u are interested in make contributions, you are welcome :)
