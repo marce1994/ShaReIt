@@ -3,6 +3,7 @@
   - Real time actualizations via socket.io
   - Real time webs and other nodes db sync.
   - Customizable and modular.
+  - SteemIt like system to earn money with like(maybe some day).
   
 # How to start
 
