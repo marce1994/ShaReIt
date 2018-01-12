@@ -12,7 +12,7 @@ var fs = require('fs');
 var Gun = require('gun');
 var gunOptions = {
   file: 'database/data.json',
-  peers: ['http://192.168.1.130:8080/gun','http://192.168.1.131:80/gun'],
+  /*peers: ['http://192.168.1.130:8080/gun','http://192.168.1.131:80/gun'],*/
   web: http
 }
 var gun = Gun(gunOptions);

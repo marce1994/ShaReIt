@@ -1,6 +1,8 @@
+var viewModel;
+
 $(document).ready(function(){
-    ko.applyBindings(indexViewModel);
-    loadLatestUploads(20,1);    
+    viewModel = indexViewModel();
+    ko.applyBindings(viewModel);
 });
 
 function loadLatestUploads(numxpage, page){
@@ -26,9 +28,10 @@ function loadLatestUploads(numxpage, page){
 var socket = io.connect();
 
 socket.on('messages', function(data) {
-  console.log(data);
+    console.log(data);
 });
 
 socket.on('new', function(data) {
-  console.log(data);
+    viewModel.latestUploads.push(data);
+    console.log(data);
 });
