@@ -3,23 +3,18 @@ var viewModel;
 $(document).ready(function(){
     viewModel = indexViewModel();
     ko.applyBindings(viewModel);
+    loadLatestUploads();    
 });
 
-function loadLatestUploads(numxpage, page){
-    var data = {
-        numxpage,
-        page
-    };
-    console.log("llamando...");
+function loadLatestUploads(){
     $.ajax({
-        url: "api/lastestuploads",
+        url: "/api/latestuploads",
         type: "GET",
-        data: data,
         contentType: "application/json",
         success: function(res) {
-            indexViewModel.latestUploads(res.docs);
-            //indexViewModel.pageCount(res.pages);
-            //indexViewModel.actualPage(res.currentPage);
+            res.docs.forEach(function(element) {
+                viewModel.latestUploads.push(element);
+            }, this);
             console.log(res);
         }
     });

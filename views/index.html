@@ -64,9 +64,9 @@
             <div class="img__description">
                 <h2 data-bind="text: title"></h2>
                 <p data-bind="text: 'Descripcion: ' + description"></p>
-                <a data-bind="href: magnet">LINK</a>
-                <p data-bind="text: 'dbid: '+dbId"></p>
-                <p data-bind="text: 'timestamp: '+timestamp"></p>
+                <a class="btn-success glyphicon glyphicon-play" data-bind="click: function(){window.location = 'play?'+magnet;}">PLAY</a>
+                 <!--<p data-bind="text: 'dbid: '+dbId"></p>
+                <p data-bind="text: 'timestamp: '+timestamp"></p>-->
             </div>
           </div>
         </div>

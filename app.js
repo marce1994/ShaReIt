@@ -10,6 +10,9 @@ var path = require('path');
 var fs = require('fs');
 
 var Gun = require('gun');
+
+var latestUploads = [];
+
 var gunOptions = {
   file: 'database/data.json',
   /*peers: ['http://192.168.1.130:8080/gun','http://192.168.1.131:80/gun'],*/
@@ -33,10 +36,30 @@ function addUpload(magnetLink, title, description, imgLink, callback){
     );
 };
 //********************************************************//
-function getUploadsPaginated(callback){
+function getUploadsByWords(words, callback){
+    gun.get('uploads_database').map().val(function(data){
+        var obj = {
+            dbId: data._['#'],
+            magnet: data.magnet,
+            title: data.title,
+            imgLink: data.imgLink,
+            description: data.description,
+            timestamp: data.timestamp,
+        };
+        var retorno = false;
+        words.forEach(function(element) {
+            if(data.title.includes(name))
+                retorno = true;
+        }, this);
+        if(retorno){
+            callback(obj);            
+        }
+    });
+}
+//********************************************************//
+function getUploads(callback){
     //Async -> i dont know how to put a callback into this
     //http://gun.js.org/docs/val.html
-    var counter = 0;
     gun.get('uploads_database').map().val(function(data){
         counter++;
         var obj = {
@@ -47,7 +70,7 @@ function getUploadsPaginated(callback){
             description: data.description,
             timestamp: data.timestamp,
         };
-        callback(obj,counter);
+        callback(obj);
     });
 };
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -62,22 +85,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', function(req, res){
   res.sendFile(path.join(__dirname, 'views/index.html'));
 });
+app.get('/play', function(req, res){
+    res.sendFile(path.join(__dirname, 'views/play.html'));
+});
 //********************************************************//
-app.get('/api/lastestuploads', function(req, res) {
-    //console.log(req.query);
+app.get('/api/latestuploads', function(req, res) {
+    var obj = {}
+    obj.docs = latestUploads;
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(obj));
+});
+//********************************************************//
+/*app.get('/api/search', function(req, res) {
     var obj = {}
     obj.docs = [];
-    getUploadsPaginated(function(doc, counter){
-        //{ }, req.query.numxpage, req.query.page,
-        obj.count = counter;
+    var words = req.words.split(" ");
+    getUploadsByWords(words,function(doc){
         obj.docs.push(doc);
         if(counter == req.query.numxpage){
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify(obj));
-            //console.log(obj);
         }
     });
-});
+});*/
 //********************************************************//
 app.post('/api/upload', function(req, res) {
     addUpload(req.body.magnet, req.body.title, req.body.description, req.body.imgLink, function(ack){
@@ -104,14 +134,13 @@ gun.get('uploads_database').on(function(data, key){
             timestamp: data.timestamp,
         };
         io.sockets.emit('new', obj);
+        latestUploads.push(obj);
+        if(latestUploads.length > 20){
+            latestUploads.shift();
+        }
     });
 },true);
 
-setInterval(function(){
-    if(update.length > 0){
-        
-    }
-}, 1000);
 //cuando se conecta un cliente nuevo
 io.sockets.on('connect', function (socket) {
     clients.push(socket);
