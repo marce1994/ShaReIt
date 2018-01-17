@@ -1,7 +1,35 @@
+//refactor
+var express = require("express");
+var app = express();
+
+var web_module = require("./web/web_router.js");
+app.use(web_module);
+
+var http = require('http').createServer(app);
+var io = require('socket.io')(http);
+
+//Application run
+var port = process.env.PORT || 8080;
+var server = http.listen(port, function(){
+  console.log('Server listening on port ' + port);
+});
+//enregion refactor
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+
 ////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////DBAPI//////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
-var express = require('express');
+/*var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 var http = require('http').createServer(app);
@@ -16,11 +44,11 @@ var latestUploads = [];
 var gunOptions = {
   file: 'database/data.json',
   /*peers: ['http://192.168.1.130:8080/gun','http://192.168.1.131:80/gun'],*/
-  web: http
+  /*web: http
 }
 var gun = Gun(gunOptions);
-//********************************************************//
-function addUpload(magnetLink, title, description, imgLink, callback){
+//********************************************************//*
+/*function addUpload(magnetLink, title, description, imgLink, callback){
     var uploads = gun.get('uploads_database');
     uploads.set({
             title : title,
@@ -35,8 +63,8 @@ function addUpload(magnetLink, title, description, imgLink, callback){
         }
     );
 };
-//********************************************************//
-function getUploadsByWords(words, callback){
+//********************************************************//*
+/*function getUploadsByWords(words, callback){
     gun.get('uploads_database').map().val(function(data){
         var obj = {
             dbId: data._['#'],
@@ -56,8 +84,8 @@ function getUploadsByWords(words, callback){
         }
     });
 }
-//********************************************************//
-function getUploads(callback){
+//********************************************************//*
+/*function getUploads(callback){
     //Async -> i dont know how to put a callback into this
     //http://gun.js.org/docs/val.html
     gun.get('uploads_database').map().val(function(data){
@@ -80,21 +108,21 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-//********************************************************//
-app.get('/', function(req, res){
+//********************************************************//*
+/*app.get('/', function(req, res){
   res.sendFile(path.join(__dirname, 'views/index.html'));
 });
 app.get('/play', function(req, res){
     res.sendFile(path.join(__dirname, 'views/play.html'));
 });
-//********************************************************//
-app.get('/api/latestuploads', function(req, res) {
+//********************************************************//*
+/*app.get('/api/latestuploads', function(req, res) {
     var obj = {}
     obj.docs = latestUploads;
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(obj));
 });
-//********************************************************//
+//********************************************************//*
 /*app.get('/api/search', function(req, res) {
     var obj = {}
     obj.docs = [];
@@ -108,7 +136,7 @@ app.get('/api/latestuploads', function(req, res) {
     });
 });*/
 //********************************************************//
-app.post('/api/upload', function(req, res) {
+/*app.post('/api/upload', function(req, res) {
     addUpload(req.body.magnet, req.body.title, req.body.description, req.body.imgLink, function(ack){
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(ack));
@@ -150,11 +178,11 @@ io.sockets.on('disconnect', function (socket) {
     socket.emit("Disconnected...");
     clients.splice(clients.indexOf(socket),1);
 });
-//********************************************************//
+//********************************************************//*
 /*var server = app.listen(3000, function(){
   console.log('Server listening on port 3000');
 });*/
 
-var server = http.listen(process.env.PORT || 5000, function(){
+/*var server = http.listen(process.env.PORT || 5000, function(){
   console.log('Server listening on port ' + (process.env.PORT || 5000));
-});
+});*/

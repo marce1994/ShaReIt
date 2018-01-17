@@ -3,12 +3,12 @@ var viewModel;
 $(document).ready(function(){
     viewModel = indexViewModel();
     ko.applyBindings(viewModel);
-    loadLatestUploads();    
+    loadLatestUploads();
 });
 
 function loadLatestUploads(){
     $.ajax({
-        url: "/api/latestuploads",
+        url: "/webapi/latestuploads",
         type: "GET",
         contentType: "application/json",
         success: function(res) {
