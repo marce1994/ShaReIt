@@ -1,3 +1,5 @@
+# DEMO(Autodeployed) http://shareitalpha.herokuapp.com/
+
 # ShaRit (Still in brainstorming and development).
   - p2p Share magnet link application.
   - Real time actualizations via socket.io
