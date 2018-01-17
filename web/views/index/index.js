@@ -8,7 +8,7 @@ $(document).ready(function(){
 
 function loadLatestUploads(){
     $.ajax({
-        url: "/webapi/latestuploads",
+        url: "/webapi/lastestuploads",
         type: "GET",
         contentType: "application/json",
         success: function(res) {
