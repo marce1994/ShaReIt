@@ -1,7 +1,7 @@
 module.exports = function () {
     var Datastore = require('nedb');
     db = {};
-    db.uploads = new Datastore('../web_db/uploads.db');
+    db.uploads = new Datastore('./web/web_db/uploads.db');
     db.uploads.loadDatabase();
 
     module.addUpload = function (obj) {
