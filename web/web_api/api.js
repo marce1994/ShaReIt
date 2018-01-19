@@ -1,8 +1,12 @@
 var express = require("express");
 var path = require('path');
+var bodyParser = require('body-parser');
+
 var uploadRepository = require("./uploads_repository")();
 
 var router = express.Router();
+router.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
+router.use(bodyParser.json());
 
 router.get("/lastestuploads", function(req, res){
     uploadRepository.listUploads({}, req.query.page, req.query.numxpage, function(obj){
@@ -17,4 +21,17 @@ router.get("/lastestuploads", function(req, res){
         res.send(JSON.stringify(obj));        
     });
 });
+
+router.post('/upload', function(req, res) {
+    var Obj = {
+        title : req.body.title,
+        description : req.body.description,
+        img : req.body.img,
+        tags : req.body.tags,
+        magnet : req.body.magnet,
+    };
+    uploadRepository.addUpload(Obj);
+    res.send("todo ok wacha");
+});
+
 module.exports = router;

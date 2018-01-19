@@ -11,42 +11,60 @@
             https://github.com/adrotec/knockout-file-bindings
         -->
         <link href="public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <script src="public/vendor/bootstrap/js/bootstrap.min.js"></script>        
         <script src="public/vendor/jquery/jquery.min.js"></script>
+        <script src="public/vendor/bootstrap/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div class="container">
+        <div class="container" data-bind="visible: seeding()">
             <form class="form-horizontal">
-                <h4>Tutorial</h4>
+                <h4>Sharing torrent</h4>
+                <h2 data-bind="text: uploadSpeed"></h2>             
+                <h2 data-bind="text:  peerCount"></h2>
+            </form>
+        </div>
+
+        <div class="container" data-bind="hidden: seeding()">
+            <form class="form-horizontal">
+                <h4>Share a torrent</h4>
                 <hr/>
                 <div class="form-group">
                     <label for="title" class="col-md-2 control-label">Title</label>
                     <div class="col-md-10">
-                        <input type="text" data-bind="text: title" name="title" class="form-control"/>
+                        <input type="text" data-bind="value: title" name="title" class="form-control"/>
                     </div>
                 </div>
-            <div class="form-group">
+                <div class="form-group">
                     <label for="description" class="col-md-2 control-label">Description</label>
                     <div class="col-md-10">
-                        <textarea data-bind="text: description" name="description" class="form-control"></textarea>
+                        <textarea data-bind="value: description" name="description" class="form-control"></textarea>
                     </div>
                 </div>
-            <div class="form-group">
-                    <label for="attachment" class="col-md-2 control-label">Attachment</label>
-                    <div class="col-md-10">
-                        <input type="file" name="attachment" class="form-control" data-bind="text: title"/>
-                    </div>
+                <div class="form-group">
+                    <section>
+                        <label for="image" class="col-md-2 control-label">Image: </label>
+                        <input type="file" name="image">
+                        <p data-bind="src: image"></p>
+                        <img style="max-width:100px;max-height:100px;" id="imgpreview" src=""></img>
+                    </section>
                 </div>
-            <div class="form-group">
+                <div class="form-group">
+                    <section>
+                        <label for="upload" class="col-md-2 control-label">Archivos: </label>
+                        <input type="file" name="upload" multiple>
+                        <div data-bind="foreach: fileNames">
+                            <p data-bind="text: $data"></p>
+                        </div>
+                    </section>
+                </div>
+                <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="button" class="btn btn-primary" 
-
-                        value="Save" data-ng-click="saveTutorial(tutorial)" />
+                        <input type="button" class="btn btn-primary" value="Save" data-bind="click: function(){publishTorrent()}" />
                     </div>
                 </div>
             </form>
         </div>
-        <script src="public/vendor/jquery/jquery.min.js"></script>
+        <script src="public/vendor/image-compressor.js"></script>        
+        <script src="public/vendor/dragdrop.min.js"></script>
         <script src="public/vendor/knockout-3.4.2.js"></script>
         <script src="public/vendor/webtorrent.min.js"></script>
         <script src="public/upload/view-model.js"></script>

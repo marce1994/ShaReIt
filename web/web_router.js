@@ -1,6 +1,6 @@
 var express = require("express");
 var path = require('path');
-var api = require('./web_api/api');
+var api = require('./web_api/api.js');
 
 var router = express.Router();
 
