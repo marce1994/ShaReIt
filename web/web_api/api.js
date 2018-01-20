@@ -6,7 +6,7 @@ var uploadRepository = require("./uploads_repository")();
 
 var router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
-router.use(bodyParser.json());
+router.use(bodyParser.json({ extended: false, limit: '50mb' }));
 
 router.get("/lastestuploads", function(req, res){
     uploadRepository.listUploads({}, req.query.page, req.query.numxpage, function(obj){

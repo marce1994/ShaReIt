@@ -67,7 +67,7 @@ function publishTorrent(){
             viewModel.seeding(true);
             console.log("Torrent created.");
             viewModel.torrent(torrent);
-            viewModel.magnetLink(torrent.magnetLink);
+            viewModel.magnetLink(torrent.magnetURI);
             var Obj = {
                 title : viewModel.title(),
                 description : viewModel.description(),
@@ -103,15 +103,13 @@ function prettyBytes(num) {
     unit = units[exponent]
     return (neg ? '-' : '') + num + ' ' + unit
 }
-function copyMagnet() {
-  document.execCommand(viewModel.magnetLink());
-}
 
 function postShare(data){
+    console.log(data);
     $.ajax({
         type: "POST",
         url: '/webapi/upload',
-        data: JSON.stringify(data),
+        data: data,
         dataType: 'json',
         success: function(){
             console.log("posted")

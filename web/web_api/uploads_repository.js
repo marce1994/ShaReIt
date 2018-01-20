@@ -4,13 +4,12 @@ module.exports = function () {
     db.uploads = new Datastore('./web/web_db/uploads.db');
     db.uploads.loadDatabase();
 
-    module.addUpload = function (Obj) {
-        db.uploads.insert(Obj, function (err, newDoc) {
-            console.log(JSON.stringify(Obj));
+    module.addUpload = function (obj) {
+        db.uploads.insert(obj, function (err, newDoc) {
            if(err != null)
                 console.log(err);
            else
-               console.log("Insert successfull: " + JSON.stringify(newDoc));
+               console.log("Insert successfull -> " + newDoc._id);
         });
     };
 
