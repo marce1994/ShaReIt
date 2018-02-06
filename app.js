@@ -22,10 +22,19 @@ if (cluster.isMaster) {
   });
 } else {
     //Application run
+    io.on('connection', function(client){
+        client.emit('message','hello :)');
+        console.log('Cliente conectado');
+        client.on('message', function(data)
+        {
+            console.log(data);
+        });
+    });
     var port = process.env.PORT || 8080;
     http.listen(port);
     console.log(`Worker ${process.pid} started and listening on port ${port}`);
 }
+
 //enregion refactor
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
