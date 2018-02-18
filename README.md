@@ -1,4 +1,4 @@
-# DEMO(Autodeployed) http://shareitalpha.herokuapp.com/
+# DEMO(Autodeployed -> not working now. just branch working) http://shareitalpha.herokuapp.com/
 
 # ShaReIt (Still in brainstorming and development).
   - p2p Share magnet link application.
