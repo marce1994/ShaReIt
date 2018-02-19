@@ -14,8 +14,8 @@
   - node app.js
 
 # Adding new posts
-  - open http://localhost:80/
-  - postman to http://localhost:80/api/upload with the next body
+  - open http://localhost:8080/
+  - postman to http://localhost:8080/api/upload with the next body
   
   ```json
   {
