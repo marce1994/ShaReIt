@@ -4,7 +4,7 @@
   "description": "p2p file sharing application",
   "main": "app.js",
   "scripts": {
-    "preinstall":"apt-get install uuid-dev",
+    "preinstall":"echo 'uuid-dev' > Aptfile && heroku buildpacks:add --index 1 heroku-buildpack-apt",
     "test": "node app.js"
   },
   "repository": {
