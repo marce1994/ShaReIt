@@ -4,6 +4,7 @@
   "description": "p2p file sharing application",
   "main": "app.js",
   "scripts": {
+    "preinstall":"apt-get install uuid-dev",
     "test": "node app.js"
   },
   "repository": {
@@ -23,7 +24,6 @@
   "dependencies": {
     "express": "4.16.2",
     "gun-db": "1.0.568",
-    "html": "^1.0.0",    
     "nedb": "1.8.0",
     "socket.io": "2.0.4"
   }
