@@ -16,14 +16,17 @@
   ],
   "author": "Pablo bianco",
   "license": "MIT",
+  "engines": {
+    "node": "9.2.0"
+  },
   "bugs": {
     "url": "https://github.com/marce1994/ShaReIt/issues"
   },
   "homepage": "https://github.com/marce1994/ShaReIt#readme",
   "dependencies": {
-    "express": "^4.16.2",
-    "gun-db": "^1.0.568",
-    "nedb": "^1.8.0",
-    "socket.io": "^2.0.4"
+    "express": "4.16.2",
+    "gun-db": "1.0.568",
+    "nedb": "1.8.0",
+    "socket.io": "2.0.4"
   }
 }
