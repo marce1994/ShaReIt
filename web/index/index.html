@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ShaReIt alpha</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.4.2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="/public/index.js"></script>
+</head>
+<body>
+    <p>Something</p>
+    <thead>
+        <tr>
+            <th>title</th>
+            <th>description</th>
+            <th>image</th>
+            <th>magnet</th>
+            <th>steemitposturi</th>
+        </tr>
+    </thead>
+    <br/>
+    <tbody>
+        <!-- ko foreach: latestUploads() -->
+            <tr>
+                <td><span data-bind="text: title + ' |'"></span></td>
+                <td><span data-bind="text: description + ' |'"></span></td>
+                <td><span data-bind="text: image + ' |'"></span></td>
+                <td><span data-bind="text: magnet + ' |'"></span></td>
+                <td><span data-bind="text: steemitposturi + ' |'"></span></td>
+            </tr>
+            <br/>
+        <!-- /ko -->
+    </tbody>
+    <br/>
+    <button data-bind="click: AddObject">Click me</button>
+</body>
+</html>
