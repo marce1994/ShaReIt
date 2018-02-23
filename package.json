@@ -16,9 +16,6 @@
   ],
   "author": "Pablo bianco",
   "license": "MIT",
-  "engines": {
-    "node": "9.2.0"
-  },
   "bugs": {
     "url": "https://github.com/marce1994/ShaReIt/issues"
   },
