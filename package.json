@@ -4,7 +4,7 @@
   "description": "p2p file sharing application",
   "main": "app.js",
   "scripts": {
-    "preinstall":"echo hello world",
+    "preinstall":"sudo yum install libuuid libuuid-devel",
     "test": "node app.js"
   },
   "repository": {
