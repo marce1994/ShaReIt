@@ -13,7 +13,7 @@
   - npm install
   - node app.js
 
-# Adding new posts
+# Adding new posts (DEPRECATED)
   - open http://localhost:8080/
   - postman to http://localhost:8080/api/upload with the next body
   
