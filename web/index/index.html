@@ -5,10 +5,40 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  </head>
+    <link rel="stylesheet" href="/public/index.css">
+</head>
   <body>
+      <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="http://via.placeholder.com/200x200" alt="ShaReIt">
+                </div>
+                <div class="col-md-6">
+                    <ul class="icon-menu list-line text-xs-right">
+                        <li class="list-inline-item">
+                            <a href="">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fas fa-cloud-upload-alt fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                            <a href="">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fas fa-cloud-upload-alt fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+      </header>
     <h1>Hello, world!</h1>
     <p>Something</p>
     <thead>
@@ -23,6 +53,7 @@
     <br/>
     <tbody>
         <!-- ko foreach: latestUploads() -->
+
             <tr>
                 <td><span data-bind="text: title + ' |'"></span></td>
                 <td><span data-bind="text: description + ' |'"></span></td>
