@@ -1,6 +1,6 @@
 //CORE
 //---------------------------------------------------
-//const cluster = require('cluster');
+const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 //---------------------------------------------------
 var express = require("express");
@@ -18,6 +18,13 @@ io.on('connection', function(client){
     client.emit('message','hello :)');
 
     console.log('Cliente conectado');
+
+    database.ListObj({}, function(docs){
+        console.log(docs.length);
+        docs.forEach(element => {
+            client.emit('new',element);
+        });
+    });
 
     client.on('message', function(data)
     {
