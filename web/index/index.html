@@ -16,21 +16,21 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <img src="http://via.placeholder.com/200x200" alt="ShaReIt">
+                    <img src="http://via.placeholder.com/350x100" alt="ShaReIt">
                 </div>
                 <div class="col-md-6">
                     <ul class="icon-menu list-line text-xs-right">
                         <li class="list-inline-item">
-                            <a href="">
+                            <a href="" data-bind="click: AddObject">
                                 <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fas fa-cloud-upload-alt fa-stack-1x fa-inverse"></i>
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fas fa-upload fa-stack-1x fa-inverse"></i>
                                 </span>
                             </a>
                             <a href="">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fas fa-cloud-upload-alt fa-stack-1x fa-inverse"></i>
+                                    <i class="fas fa-search fa-stack-1x fa-inverse"></i>
                                 </span>
                             </a>
                         </li>
@@ -39,33 +39,37 @@
             </div>
         </div>
       </header>
-    <h1>Hello, world!</h1>
-    <p>Something</p>
-    <thead>
-        <tr>
-            <th>title</th>
-            <th>description</th>
-            <th>image</th>
-            <th>magnet</th>
-            <th>steemitposturi</th>
-        </tr>
-    </thead>
-    <br/>
-    <tbody>
+      <div class="container">
+        <div class="col-md-12">
+            <img src="http://via.placeholder.com/1920x300" alt="slide">
+        </div>
         <!-- ko foreach: latestUploads() -->
-
-            <tr>
-                <td><span data-bind="text: title + ' |'"></span></td>
-                <td><span data-bind="text: description + ' |'"></span></td>
-                <td><span data-bind="text: image + ' |'"></span></td>
-                <td><span data-bind="text: magnet + ' |'"></span></td>
-                <td><span data-bind="text: steemitposturi + ' |'"></span></td>
-            </tr>
-            <br/>
-        <!-- /ko -->
-    </tbody>
-    <br/>
-    <button data-bind="click: AddObject">Click me</button>
+        <div class="row">
+            <div class="col-md-4">
+                <img data-bind="attr: { src: image }"></img>
+            </div>
+            <div class="col-md-8">
+                <h2 data-bind="text: title"></h2>
+                <div class="col-md-12">
+                    <p data-bind="text: description"></p>
+                </div>
+                <div class="col-md-12 social">
+                    <ul class="icon-menu list-line text-xs-right">
+                        <li class="list-inline-item"></li>
+                            <a data-bind="attr: { href: magnet }">
+                                <i class="fas fa-download fa-lg"></i>
+                            </a>
+                            <a data-bind="attr: { href: steemitposturi }">
+                                <i class="fas fa-heart fa-lg"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /ko --> 
+        <button data-bind="click: AddObject">Click me</button>
+      </div>
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>

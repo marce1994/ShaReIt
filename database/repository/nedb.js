@@ -10,7 +10,7 @@ module.exports = function (nedbOptions) {
         });
     }
     module.ListObjects = function(filter, callback){    
-        return db.uploads.find(filter).sort( {timestamp: 1} ).limit(10).exec(function (err, docs) {
+        return db.uploads.find(filter).sort( { timestamp: -1 } ).limit(2).exec(function (err, docs) {
             callback(err,docs);
         });
     };

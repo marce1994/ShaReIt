@@ -11,7 +11,7 @@ $(document).ready(function(){
     viewModel.newObj({
         title: 'title',
         description: 'An awsome description',
-        image: 'http://via.placeholder.com/350x350',
+        image: 'http://via.placeholder.com/350x100',
         magnet: 'magnet:?xt=urn:btih:08ada5a7a6183aae1e09d831df6748d566095a10&dn=Sintel',
         steemitposturi: 'https://steemit.com/anime/@pablobianco/shareit-network',
     });
